@@ -1,0 +1,82 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif; /* Pour avoir une police moderne et propre */
+}
+
+.App-header {
+  background-color: #282c34;  /* Fond sombre de la section d'en-tête */
+  min-height: 100vh;           /* Prend toute la hauteur de la fenêtre */
+  display: flex;               /* Flexbox pour centrer le contenu */
+  flex-direction: column;      /* Alignement vertical */
+  align-items: center;         /* Centrage horizontal */
+  justify-content: center;     /* Centrage vertical */
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-logo {
+  display: none;  /* On cache le logo React car tu n'en as plus besoin */
+}
+
+h1 {
+  font-size: 2.5em;  /* Taille du titre principal */
+  color: #fff;       /* Texte en blanc */
+  margin-top: 20px;   /* Espacement au-dessus du titre */
+}
+
+.player-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+audio {
+  width: 100%;
+  max-width: 400px; /* Limiter la largeur du lecteur à 400px */
+  border-radius: 8px;
+}
+
+main {
+  padding: 20px;      /* Espacement autour du contenu principal */
+}
+
+ul {
+  list-style-type: none;  /* On retire les puces de la liste */
+  padding: 0;             /* Enlève les marges par défaut */
+}
+
+li {
+  margin: 20px 0;      /* Espace entre chaque album */
+}
+
+img {
+  width: 200px;        /* Largeur de l'image de l'album */
+  height: 200px;       /* Hauteur de l'image de l'album */
+  object-fit: cover;   /* Assure que l'image couvre bien l'espace sans déformation */
+  border-radius: 10px; /* Coins arrondis pour un effet visuel plus agréable */
+}
+
+.App-link {
+  color: #61dafb;       /* Bleu pour les liens */
+  text-decoration: none; /* Retirer le soulignement */
+}
+
+.App-link:hover {
+  text-decoration: underline; /* Souligner le lien au survol */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Si l'utilisateur préfère moins de mouvement, on enlève l'animation du logo */
+  .App-logo {
+    animation: none;
+  }
+}
+
+/* Animation de rotation du logo (qui est désactivée ici) */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
