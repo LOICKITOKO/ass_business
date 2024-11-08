@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'core',  # Assure-toi que ton application 'core' est bien incluse
     'django.contrib.sites',  # Si tu l'utilises pour la gestion des sites
     'django_filters',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -36,6 +37,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -82,6 +84,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # L'adresse du frontend
 ]
 
 # Internationalization
