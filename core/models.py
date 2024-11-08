@@ -1,36 +1,37 @@
+import datetime
 from django.db import models
 
-# Modèle pour l'Artiste
+# Modèle pour l'artiste
 class Artist(models.Model):
-    name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='artists/')  # Assurez-vous d'avoir un champ Image pour l'image de l'artiste
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
-# Modèle pour l'Album
+# Modèle pour l'album
 class Album(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)  # Champ pour la description de l'album
-    release_date = models.DateField()  # Champ pour la date de sortie de l'album
-    cover_image = models.ImageField(upload_to='albums/')  # Champ Image pour la couverture de l'album
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name="albums")  # Relation avec l'Artiste
+    artist = models.ForeignKey(Artist, related_name='albums', on_delete=models.CASCADE)
+    release_date = models.DateField()
 
     def __str__(self):
         return self.title
 
-# Modèle pour la Chanson
+# Modèle pour la chanson
 class Song(models.Model):
     title = models.CharField(max_length=200)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="songs")  # Relation avec l'Album
+    album = models.ForeignKey(Album, related_name='songs', on_delete=models.CASCADE)
+    duration = models.IntegerField()  # Durée en secondes
 
     def __str__(self):
         return self.title
 
-# Modèle pour le Commentaire
+# Modèle pour le commentaire
 class Comment(models.Model):
+    song = models.ForeignKey(Song, related_name='comments', on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=100)
     content = models.TextField()
-    song = models.ForeignKey(Song, on_delete=models.CASCADE, related_name="comments")  # Relation avec la Chanson
+    date_posted = models.DateTimeField(auto_now_add=True)  # Champ de date automatique
 
     def __str__(self):
-        return self.content[:50]  # Afficher les 50 premiers caractères du commentaire
+        return f'Comment by {self.user_name} on {self.song.title}'

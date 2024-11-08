@@ -16,8 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from core.views import AlbumViewSet, ArtistViewSet, SongViewSet, CommentViewSet  # Importer tes vues
 
+# Initialisation du routeur DRF
+router = DefaultRouter()
+router.register(r'albums', AlbumViewSet)
+router.register(r'artists', ArtistViewSet)
+router.register(r'songs', SongViewSet)
+router.register(r'comments', CommentViewSet)
+
+# Définition des URL
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('core.urls')),  # Inclut les URLs de ton app 'core'
+    path('admin/', admin.site.urls),  # Accès à l'interface d'administration
+    path('api/', include(router.urls)),  # Inclure toutes les routes définies par le routeur
+]
+
+# Si tu veux gérer une page d'accueil (optionnel)
+from django.http import HttpResponse
+urlpatterns += [
+    path('', lambda request: HttpResponse('Bienvenue sur l\'API !')),  # Redirige vers une page d'accueil si tu le souhaites
 ]

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Commentaires</title>
+</head>
+<body>
+    <h1>Liste des Commentaires</h1>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.user_name }}</strong> a commenté sur la chanson "{{ comment.song.title }}":
+                <p>{{ comment.content }}</p>
+                <small>Publié le : {{ comment.date_posted }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

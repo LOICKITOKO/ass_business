@@ -106,7 +106,4 @@ MEDIA_ROOT = BASE_DIR / 'media'  # Le répertoire où les fichiers médias seron
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Pour servir les fichiers médias pendant le développement
-if DEBUG:
-    from django.conf.urls.static import static
-    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
+# Pas besoin de servir les fichiers médias ici, cela doit être fait dans urls.py
