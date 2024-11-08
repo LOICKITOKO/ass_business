@@ -1,37 +1,36 @@
 from django.db import models
 
+# Modèle pour l'Artiste
 class Artist(models.Model):
-    name = models.CharField(max_length=255)
-    bio = models.TextField()
-    image = models.ImageField(upload_to='artists/', blank=True, null=True)
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='artists/')  # Assurez-vous d'avoir un champ Image pour l'image de l'artiste
 
     def __str__(self):
         return self.name
 
+# Modèle pour l'Album
 class Album(models.Model):
-    artist = models.ForeignKey(Artist, related_name="albums", on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    cover_image = models.ImageField(upload_to='albums/')
-    release_date = models.DateField()
-    description = models.TextField()
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)  # Champ pour la description de l'album
+    release_date = models.DateField()  # Champ pour la date de sortie de l'album
+    cover_image = models.ImageField(upload_to='albums/')  # Champ Image pour la couverture de l'album
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name="albums")  # Relation avec l'Artiste
 
     def __str__(self):
         return self.title
 
+# Modèle pour la Chanson
 class Song(models.Model):
-    album = models.ForeignKey(Album, related_name="songs", on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    audio_file = models.FileField(upload_to='songs/')
-    duration = models.PositiveIntegerField()  # in seconds
+    title = models.CharField(max_length=200)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="songs")  # Relation avec l'Album
 
     def __str__(self):
         return self.title
 
+# Modèle pour le Commentaire
 class Comment(models.Model):
-    song = models.ForeignKey(Song, related_name="comments", on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=255)
-    text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, related_name="comments")  # Relation avec la Chanson
 
     def __str__(self):
-        return f"Comment by {self.user_name} on {self.song.title}"
+        return self.content[:50]  # Afficher les 50 premiers caractères du commentaire
