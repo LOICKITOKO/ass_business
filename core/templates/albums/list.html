@@ -1,0 +1,21 @@
+<!-- templates/albums/list.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Albums</title>
+</head>
+<body>
+    <h1>Liste des Albums</h1>
+    {% if albums %}
+        <ul>
+            {% for album in albums %}
+                <li>{{ album.title }} - {{ album.artist.name }} ({{ album.release_date }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun album disponible.</p>
+    {% endif %}
+</body>
+</html>
