@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'core',  # Assure-toi que ton application 'core' est bien incluse
     'django.contrib.sites',  # Si tu l'utilises pour la gestion des sites
+    'django_filters',
 ]
 
 MIDDLEWARE = [

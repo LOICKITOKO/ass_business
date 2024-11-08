@@ -2,6 +2,10 @@ from rest_framework import viewsets
 from django.shortcuts import render
 from .models import Album, Artist, Song, Comment
 from .serializers import AlbumSerializer, ArtistSerializer, SongSerializer, CommentSerializer
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 # ViewSet pour les Albums
 class AlbumViewSet(viewsets.ModelViewSet):
@@ -34,6 +38,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
 # Vue pour afficher les commentaires dans une page HTML
 def comment_list(request):
