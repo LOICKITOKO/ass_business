@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';  // Importer le fichier CSS pour styliser l'application
-
 import { fetchAlbums } from './services/api';  // Import de la fonction pour récupérer les albums
 
 function App() {
@@ -8,6 +7,7 @@ function App() {
   const [loading, setLoading] = useState(true);  // État pour afficher un message de chargement
   const [error, setError] = useState(null);  // État pour gérer les erreurs
   const [menuOpen, setMenuOpen] = useState(false);  // État pour gérer l'ouverture/fermeture du menu
+  const [searchQuery, setSearchQuery] = useState('');  // État pour stocker la requête de recherche
 
   // Utilisation de useEffect pour récupérer les albums une fois que le composant est monté
   useEffect(() => {
@@ -27,6 +27,11 @@ function App() {
     setMenuOpen(!menuOpen);
   };
 
+  // Gestion de la recherche d'albums en fonction de la requête
+  const filteredAlbums = albums.filter(album =>
+    album.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   // Si l'API est en cours de chargement
   if (loading) {
     return <p>Chargement des albums...</p>;
@@ -39,6 +44,17 @@ function App() {
 
   return (
     <div className="App">
+      {/* Barre de recherche */}
+      <div className="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Recherchez..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button onClick={() => setSearchQuery('')}>Rechercher</button>
+      </div>
 
       {/* Bouton Menu Burger */}
       <div className="menu-toggle" onClick={toggleMenu}>
@@ -60,32 +76,24 @@ function App() {
         </ul>
       </div>
 
-      {/* Affichage des albums récupérés */}
+      {/* Affichage des albums filtrés par la recherche */}
       <div className={`album-list ${menuOpen ? 'shift' : ''}`}>
-        {albums.length > 0 ? (
-          albums.map(album => (
+        {filteredAlbums.length > 0 ? (
+          filteredAlbums.map(album => (
             <div key={album.id} className="album-card">
-              {/* Affichage de la couverture de l'album */}
               <img src={album.cover_image || 'default_cover.jpg'} alt={album.title} />
-
               <h3>{album.title}</h3>
-              <p>By: {album.artist ? album.artist.name : 'Unknown Artist'}</p> {/* Afficher le nombre de chansons */}
+              <p>By: {album.artist ? album.artist.name : 'Unknown Artist'}</p>
               <div className="album-songs-count">
                 <span>Nombre de chansons : {album.songs ? album.songs.length : 0}</span>
               </div>
-
-              {/* Affichage du nombre d'achats */}
               <div className="album-purchases">
                 <span>Achats : {album.purchases ? album.purchases : 0}</span>
               </div>
-
-              {/* Boutons "Écouter" et "Acheter" */}
               <div className="buttons">
                 <button className="listen-button">Écouter</button>
                 <button className="buy-button">Acheter</button>
               </div>
-
-              {/* Affichage des petites colonnes représentant les chansons */}
               <div className="song-list">
                 {Array.from({ length: album.songs_count }).map((_, index) => (
                   <div key={index} className="song-column">

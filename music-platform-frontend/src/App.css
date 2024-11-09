@@ -35,6 +35,31 @@ h2 {
   color: #0bd96b;
 }
 
+/* Styles de la barre de recherche */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+#searchInput {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /* Style pour le menu latéral */
 .sidebar {
   position: fixed;
