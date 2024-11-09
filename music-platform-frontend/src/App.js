@@ -39,8 +39,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>AS-BUSINESS</h1>
-      <h2>Albums</h2>
 
       {/* Bouton Menu Burger */}
       <div className="menu-toggle" onClick={toggleMenu}>

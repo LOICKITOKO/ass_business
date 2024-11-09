@@ -9,10 +9,9 @@ body {
 
 /* App.css */
 .App {
-  font-family: cursive;
+  font-family: ui-serif;
   padding: 20px;
   text-align: center;
-  display: block; /* Changer de flex à block pour un affichage plus naturel */
   position: relative; /* Position relative pour bien afficher le bouton burger */
 }
 
