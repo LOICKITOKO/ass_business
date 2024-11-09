@@ -35,6 +35,18 @@ h2 {
   color: #0bd96b;
 }
 
+/* Conteneur pour centrer le logo */
+.logo-container {
+  text-align: center; /* Centre le logo horizontalement */
+  margin-top: 20px; /* Ajustez l'espacement au besoin */
+}
+
+/* Style du logo */
+.logo {
+  width: 150px; /* Ajustez la taille selon vos préférences */
+  height: auto;
+}
+
 /* Styles de la barre de recherche */
 .search-bar {
   display: flex;
