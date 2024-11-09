@@ -35,15 +35,14 @@ h2 {
   color: #0bd96b;
 }
 
-/* Conteneur pour centrer le logo */
 .logo-container {
-  text-align: center; /* Centre le logo horizontalement */
-  margin-top: 20px; /* Ajustez l'espacement au besoin */
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  margin-top: 2vh; /* 2% de la hauteur de l'écran */
 }
 
-/* Style du logo */
 .logo {
-  width: 150px; /* Ajustez la taille selon vos préférences */
+  width: 150px; /* Ajustez cette valeur pour contrôler la taille */
   height: auto;
 }
 

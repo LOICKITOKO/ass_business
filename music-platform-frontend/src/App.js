@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';  // Importer le fichier CSS pour styliser l'application
 import { fetchAlbums } from './services/api';  // Import de la fonction pour récupérer les albums
-import logo from './images/logo.png'; // Mettez le bon chemin si votre logo est dans un autre dossier
+import logo1 from './images/logo1.png'; // Mettez le bon chemin si votre logo est dans un autre dossier
 
 function App() {
   const [albums, setAlbums] = useState([]);  // État pour stocker les albums récupérés
@@ -47,7 +47,7 @@ function App() {
     <div className="App">
     {/* Logo centré en haut */}
     <div className="logo-container">
-      <img src={logo} alt="Logo" className="logo" />
+      <img src={logo1} alt="Logo" className="logo" />
     </div>
 
       {/* Barre de recherche */}
