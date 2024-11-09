@@ -4,6 +4,11 @@ from django.db import models
 # Modèle pour l'artiste
 class Artist(models.Model):
     name = models.CharField(max_length=100)
+    bio = models.TextField(null=True, blank=True)
+    is_certified = models.BooleanField(default=False)  # Nouveau champ pour certification
+
+    def __str__(self):
+        return self.name
 
     def __str__(self):
         return self.name
