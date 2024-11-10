@@ -113,6 +113,44 @@ function App() {
           <p>Aucun album trouvé.</p>
         )}
       </div>
+
+	 {/* Footer */}
+      <footer className="footer">
+        <div className="footer-section">
+          <h4>Nous contacter</h4>
+          <ul>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#support">Support</a></li>
+            <li><a href="#email">Email</a></li>
+          </ul>
+        </div>
+        <div className="footer-section">
+          <h4>Guide</h4>
+          <ul>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#help">Aide</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-section">
+          <h4>Confidentialités</h4>
+          <ul>
+            <li><a href="#privacy">Politique de confidentialité</a></li>
+            <li><a href="#terms">Conditions d'utilisation</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-section">
+          <h4>Informations légales</h4>
+          <ul>
+            <li><a href="#legal">Mentions légales</a></li>
+          </ul>
+        </div>
+      </footer>
+
+      <div className="right-copy">
+        <p className="copyright">&copy; 2024 AS-BUSINESS. Tous droits réservés.</p>
+      </div>
     </div>
   );
 }

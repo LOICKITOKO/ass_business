@@ -211,15 +211,55 @@ button {
   color: #333;
 }
 
+/* Footer */
 .footer {
-  margin-top: auto; /* Placer le footer tout en bas */
-  background-color: #fff; /* Arrière-plan blanc pour le footer */
+  display: flex;
+  justify-content: space-around;
+  background-color: #030302; /* Arrière-plan blanc pour le footer */
   padding: 20px;
   text-align: center;
-  color: #040929; /* Texte en couleur sombre pour contraster */
+  color: #040929;
 }
 
-.footer p {
+.footer-section {
+  flex: 1;
+  margin: 10px;
+}
+
+.footer-section h4 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section li {
+  margin: 5px 0;
+}
+
+.footer-section a {
+  color: #250eed;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+/* Copyright section */
+.right-copy {
+  background-color: #fff;
+  text-align: center;
+  padding: 10px;
+  color: #040929;
+  font-size: 0.9rem;
+}
+
+.right-copy p {
   margin: 0;
+  color: black;
 }
-
