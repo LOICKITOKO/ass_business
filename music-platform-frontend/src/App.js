@@ -59,7 +59,7 @@ function App() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button onClick={() => setSearchQuery('')}>Rechercher</button>
+        <button onClick={() => setSearchQuery('')}>Effacer</button>
       </div>
 
       {/* Bouton Menu Burger */}

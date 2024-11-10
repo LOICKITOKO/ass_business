@@ -1,7 +1,7 @@
 /* App.css */
 
 body {
-  background-color: #040929; /* Définir l'arrière-plan global */
+  background-color: #111112; /* Définir l'arrière-plan global */
   color: white; /* Couleur de texte par défaut pour mieux contraster avec le fond foncé */
   margin: 0;
   padding: 0;
@@ -13,6 +13,16 @@ body {
   padding: 20px;
   text-align: center;
   position: relative; /* Position relative pour bien afficher le bouton burger */
+  background-color: #030202;
+}
+
+/* Styles de la barre de recherche */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  background-color: white; /* Arrière-plan de la barre de recherche en blanc */
 }
 
 /* Menu Toggle Button */
@@ -65,7 +75,7 @@ button {
   padding: 8px 12px;
   margin-left: 5px;
   border: none;
-  background-color: #007bff;
+  background-color: black;
   color: white;
   border-radius: 4px;
   cursor: pointer;
@@ -78,7 +88,7 @@ button {
   left: 0;
   width: 250px;
   height: 100%;
-  background-color: #1a3a58;
+  background-color: black;
   color: white;
   padding: 0px;
   display: flex;
@@ -114,6 +124,7 @@ button {
   gap: 20px;
   margin-top: 20px;
   justify-content: center;
+  background-color: #040929;
   transition: margin-left 0.3s ease; /* Ajout d'une transition pour le contenu */
   margin-left: 0; /* Position normale quand le menu est fermé */
 }
@@ -164,7 +175,7 @@ button {
 }
 
 .listen-button {
-  background-color: #007bff; /* Bleu */
+  background-color: Black; /* Bleu */
   color: white;
 }
 
@@ -173,7 +184,7 @@ button {
 }
 
 .buy-button {
-  background-color: #28a745; /* Vert */
+  background-color: #084370; /* Vert */
   color: white;
 }
 
@@ -199,3 +210,16 @@ button {
   font-size: 0.8rem;
   color: #333;
 }
+
+.footer {
+  margin-top: auto; /* Placer le footer tout en bas */
+  background-color: #fff; /* Arrière-plan blanc pour le footer */
+  padding: 20px;
+  text-align: center;
+  color: #040929; /* Texte en couleur sombre pour contraster */
+}
+
+.footer p {
+  margin: 0;
+}
+
