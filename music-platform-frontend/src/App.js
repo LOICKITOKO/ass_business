@@ -1,73 +1,161 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';  // Importer le fichier CSS pour styliser l'application
-import { fetchAlbums } from './services/api';  // Import de la fonction pour récupérer les albums
-import logo1 from './images/logo1.png'; // Mettez le bon chemin si votre logo est dans un autre dossier
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import { fetchAlbums } from './services/api';
+import logo1 from './images/logo1.png';
 
 function App() {
-  const [albums, setAlbums] = useState([]);  // État pour stocker les albums récupérés
-  const [loading, setLoading] = useState(true);  // État pour afficher un message de chargement
-  const [error, setError] = useState(null);  // État pour gérer les erreurs
-  const [menuOpen, setMenuOpen] = useState(false);  // État pour gérer l'ouverture/fermeture du menu
-  const [searchQuery, setSearchQuery] = useState('');  // État pour stocker la requête de recherche
+  const [albums, setAlbums] = useState([]); // Albums chargés
+  const [loading, setLoading] = useState(true); // État de chargement
+  const [error, setError] = useState(null); // État d'erreur
+  const [menuOpen, setMenuOpen] = useState(false); // Menu burger
 
-  // Utilisation de useEffect pour récupérer les albums une fois que le composant est monté
+  const [searchQuery, setSearchQuery] = useState(''); // Requête de recherche
+
+  const [isLogin, setIsLogin] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
+    // Récupère les albums au montage du composant
     fetchAlbums()
-      .then(data => {
-        setAlbums(data);  // Mettre à jour l'état avec les albums récupérés
-        setLoading(false);  // Mettre à jour l'état pour indiquer que le chargement est terminé
+      .then((data) => {
+        setAlbums(data); // Stocke les albums dans l'état
+        setLoading(false);
       })
-      .catch(err => {
-        setError(`Erreur : ${err.message}`);  // Gérer les erreurs
-        setLoading(false);  // Mettre à jour l'état pour indiquer que le chargement est terminé
+      .catch((err) => {
+        setError(`Erreur : ${err.message}`); // En cas d'erreur
+        setLoading(false);
       });
   }, []);
 
-  // Fonction pour basculer l'état du menu
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen(!menuOpen); // Toggle pour le menu burger
   };
 
-  // Gestion de la recherche d'albums en fonction de la requête
-  const filteredAlbums = albums.filter(album =>
-    album.title.toLowerCase().includes(searchQuery.toLowerCase())
+  // Fonction pour gérer la recherche
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value); // Mise à jour de la recherche
+  };
+
+  // Fonction pour la connexion
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      console.log('Connexion réussie');
+      setErrorMessage('');
+    } else {
+      setErrorMessage('Email ou mot de passe incorrect');
+    }
+  };
+
+  // Fonction pour l'inscription
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setErrorMessage('Les mots de passe ne correspondent pas.');
+      return;
+    }
+    const existingUser = false; // Simuler qu'il n'existe pas
+    if (existingUser) {
+      setErrorMessage('L\'utilisateur existe déjà.');
+    } else {
+      console.log('Inscription réussie');
+      setErrorMessage('');
+    }
+  };
+
+  // Filtrer les albums en fonction de la requête de recherche
+  const filteredAlbums = albums.filter(
+    (album) =>
+      album.title.toLowerCase().includes(searchQuery.toLowerCase()) || // Recherche par titre
+      album.artist?.name.toLowerCase().includes(searchQuery.toLowerCase()) // Recherche par artiste
   );
 
-  // Si l'API est en cours de chargement
+  // Afficher l'état de chargement ou d'erreur
   if (loading) {
     return <p>Chargement des albums...</p>;
   }
 
-  // Si une erreur survient
   if (error) {
     return <p>{error}</p>;
   }
 
   return (
     <div className="App">
-    {/* Logo centré en haut */}
-    <div className="logo-container">
-      <img src={logo1} alt="Logo" className="logo" />
-    </div>
-
-      {/* Barre de recherche */}
-      <div className="search-bar">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Recherchez..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button onClick={() => setSearchQuery('')}>Effacer</button>
+      <div className="logo-container">
+        <img src={logo1} alt="Logo" className="logo" />
       </div>
 
-      {/* Bouton Menu Burger */}
+      {/* Connexion / Inscription */}
+      <div className="auth-buttons">
+        {!isLogin && !isSignUp ? (
+          <div>
+            <button
+              className="auth-button auth-button-login"
+              onClick={() => setIsLogin(true)}
+            >
+              Connexion
+            </button>
+            <button
+              className="auth-button auth-button-signup"
+              onClick={() => setIsSignUp(true)}
+            >
+              Inscription
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={isLogin ? handleLogin : handleSignUp}>
+            {isSignUp && (
+              <input
+                type="text"
+                placeholder="Nom"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            )}
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {isSignUp && (
+              <input
+                type="password"
+                placeholder="Confirmer le mot de passe"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            )}
+            <button type="submit">
+              {isLogin ? 'Se connecter' : "S'inscrire"}
+            </button>
+          </form>
+        )}
+      </div>
+
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+      {/* Menu Burger */}
       <div className="menu-toggle" onClick={toggleMenu}>
-        &#9776; {/* Trois barres horizontales */}
+        &#9776;
       </div>
 
-      {/* Menu Latéral */}
+      {/* Sidebar */}
       <div className={`sidebar ${menuOpen ? 'open' : ''}`}>
         <ul>
           <li>Accueil</li>
@@ -82,7 +170,16 @@ function App() {
         </ul>
       </div>
 
-      {/* Affichage des albums filtrés par la recherche */}
+      {/* Champ de recherche */}
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        placeholder="Rechercher un album..."
+        className="search-input"
+      />
+
+	  {/* Affichage des albums filtrés par la recherche */}
       <div className={`album-list ${menuOpen ? 'shift' : ''}`}>
         {filteredAlbums.length > 0 ? (
           filteredAlbums.map(album => (
