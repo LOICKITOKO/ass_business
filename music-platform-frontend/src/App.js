@@ -178,6 +178,13 @@ function App() {
         placeholder="Rechercher un album..."
         className="search-input"
       />
+	   {/* Bouton pour effacer la recherche */}
+  <button
+    onClick={() => setSearchQuery('')}  // Réinitialise la recherche
+    className="clear-button"
+  >
+    Effacer {/* bouton effacer*/}
+  </button>
 
 	  {/* Affichage des albums filtrés par la recherche */}
       <div className={`album-list ${menuOpen ? 'shift' : ''}`}>

@@ -26,6 +26,20 @@ body {
   width: 100%; /* Prend toute la largeur disponible */
 }
 
+.clear-button {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: white; /* Couleur par défaut du texte */
+  cursor: pointer;
+  margin-left: 10px; /* Espacement entre le champ de recherche et le bouton */
+}
+
+/* Effet au survol du bouton d'effacement */
+.clear-button:hover {
+  color: red; /* La couleur devient rouge lorsque l'on survole le bouton */
+}
+
 /* Menu Toggle Button */
 .menu-toggle {
   font-size: 30px;
@@ -65,8 +79,8 @@ h2 {
   margin: 20px auto;
 }
 
-#searchInput {
-  width: 300px;
+.search-input {
+  width: 250px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
