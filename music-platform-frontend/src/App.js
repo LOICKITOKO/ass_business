@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { fetchAlbums } from './services/api';
-import logo from './src/images/logo.png';
 
 function App() {
   const [albums, setAlbums] = useState([]); // Albums chargés
@@ -84,13 +83,8 @@ function App() {
       {/* Section de l'en-tête principale */}
       <header className="main-header">
         <div className="header-content">
-	  <img src={logo} alt="Logo" className="logo"
           <h1>AS-BUSINESS</h1>
-          <nav className="header-nav">
-            <a href="#PlayList">PlayList</a>
-            <a href="#Top_Musiques">Top_Musiques</a>
-            <a href="#Paramètre">Paramètre</a>
-          </nav>
+          <h3>Transforme Ta Passion en Rêve</h3>
         </div>
         <div className="header-intro">
           <img

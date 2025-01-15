@@ -1,9 +1,9 @@
 /* Style de la page globale */
 .App {
-  font-family: 'Arial', sans-serif;
+  font-family: 'emoji';
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: black;
 }
 
 /* Effet de mouvement pour chaque élément */
@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #a80526;
   color: white;
   padding: 20px;
   position: relative;
@@ -180,13 +180,18 @@ form button:hover {
   font-size: 1.1em;
 }
 
-/* Recherche */
+.search-container {
+  display: flex; /* Utilise Flexbox pour aligner les éléments */
+  justify-content: flex-start; /* Aligne les éléments à gauche */
+  align-items: center; /* Centre les éléments verticalement */
+  gap: 10px; /* Espacement minimal entre la barre de recherche et le bouton */
+}
+
 .search-input {
-  width: 80%;
-  padding: 10px;
+  width: 50%; /* Réduit la largeur à 50% de son conteneur */
+  max-width: 200px; /* Ajoute une limite maximale pour les écrans plus larges */
+  padding: 5px;
   font-size: 1.1em;
-  margin: 20px auto;
-  display: block;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
@@ -194,12 +199,11 @@ form button:hover {
 .clear-button {
   background-color: #f44336;
   color: white;
-  padding: 10px 20px;
-  font-size: 1.1em;
+  padding: 10px 15px; /* Ajustez pour équilibrer la taille avec la barre de recherche */
+  font-size: 1em;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 10px;
 }
 
 .clear-button:hover {
@@ -216,7 +220,7 @@ form button:hover {
 }
 
 .album-card {
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -259,7 +263,7 @@ form button:hover {
 }
 
 .listen-button, .buy-button {
-  background-color: #2196F3;
+  background-color: black;
   color: white;
   padding: 10px 20px;
   font-size: 1em;
@@ -277,7 +281,7 @@ form button:hover {
 .footer {
   display: flex;
   justify-content: space-between;
-  background-color: #333;
+  background-color: #a80526;
   color: white;
   padding: 20px;
 }
@@ -320,4 +324,3 @@ form button:hover {
 .copyright {
   margin: 0;
 }
-
