@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { fetchAlbums } from './services/api';
+import logo from './src/images/logo.png';
 
 function App() {
   const [albums, setAlbums] = useState([]); // Albums chargés
@@ -83,11 +84,12 @@ function App() {
       {/* Section de l'en-tête principale */}
       <header className="main-header">
         <div className="header-content">
-          <h1>Holberton Me</h1>
+	  <img src={logo} alt="Logo" className="logo"
+          <h1>AS-BUSINESS</h1>
           <nav className="header-nav">
-            <a href="#portfolio">Portfolio</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="#PlayList">PlayList</a>
+            <a href="#Top_Musiques">Top_Musiques</a>
+            <a href="#Paramètre">Paramètre</a>
           </nav>
         </div>
         <div className="header-intro">
@@ -96,7 +98,7 @@ function App() {
             src="https://via.placeholder.com/150"
             alt="Avatar"
           />
-          <h2>Hi, I'm the Checker!</h2>
+          <h2>Bienvenue / Welcome!</h2>
           <hr />
         </div>
       </header>
