@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { fetchAlbums } from './services/api';
-import logo1 from './images/logo1.png';
 
 function App() {
   const [albums, setAlbums] = useState([]); // Albums chargés
@@ -10,7 +9,6 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false); // Menu burger
 
   const [searchQuery, setSearchQuery] = useState(''); // Requête de recherche
-
   const [isLogin, setIsLogin] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
@@ -36,12 +34,10 @@ function App() {
     setMenuOpen(!menuOpen); // Toggle pour le menu burger
   };
 
-  // Fonction pour gérer la recherche
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value); // Mise à jour de la recherche
   };
 
-  // Fonction pour la connexion
   const handleLogin = (e) => {
     e.preventDefault();
     if (email && password) {
@@ -52,30 +48,28 @@ function App() {
     }
   };
 
-  // Fonction pour l'inscription
   const handleSignUp = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setErrorMessage('Les mots de passe ne correspondent pas.');
       return;
     }
+
     const existingUser = false; // Simuler qu'il n'existe pas
     if (existingUser) {
-      setErrorMessage('L\'utilisateur existe déjà.');
+      setErrorMessage("L'utilisateur existe déjà.");
     } else {
       console.log('Inscription réussie');
       setErrorMessage('');
     }
   };
 
-  // Filtrer les albums en fonction de la requête de recherche
   const filteredAlbums = albums.filter(
     (album) =>
-      album.title.toLowerCase().includes(searchQuery.toLowerCase()) || // Recherche par titre
-      album.artist?.name.toLowerCase().includes(searchQuery.toLowerCase()) // Recherche par artiste
+      album.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      album.artist?.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Afficher l'état de chargement ou d'erreur
   if (loading) {
     return <p>Chargement des albums...</p>;
   }
@@ -86,9 +80,26 @@ function App() {
 
   return (
     <div className="App">
-      <div className="logo-container">
-        <img src={logo1} alt="Logo" className="logo" />
-      </div>
+      {/* Section de l'en-tête principale */}
+      <header className="main-header">
+        <div className="header-content">
+          <h1>Holberton Me</h1>
+          <nav className="header-nav">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+        <div className="header-intro">
+          <img
+            className="header-avatar"
+            src="https://via.placeholder.com/150"
+            alt="Avatar"
+          />
+          <h2>Hi, I'm the Checker!</h2>
+          <hr />
+        </div>
+      </header>
 
       {/* Connexion / Inscription */}
       <div className="auth-buttons">
@@ -150,12 +161,11 @@ function App() {
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-      {/* Menu Burger */}
+      {/* Menu burger */}
       <div className="menu-toggle" onClick={toggleMenu}>
         &#9776;
       </div>
 
-      {/* Sidebar */}
       <div className={`sidebar ${menuOpen ? 'open' : ''}`}>
         <ul>
           <li>Accueil</li>
@@ -170,7 +180,6 @@ function App() {
         </ul>
       </div>
 
-      {/* Champ de recherche */}
       <input
         type="text"
         value={searchQuery}
@@ -178,24 +187,26 @@ function App() {
         placeholder="Rechercher un album..."
         className="search-input"
       />
-	   {/* Bouton pour effacer la recherche */}
-  <button
-    onClick={() => setSearchQuery('')}  // Réinitialise la recherche
-    className="clear-button"
-  >
-    Effacer {/* bouton effacer*/}
-  </button>
+      <button onClick={() => setSearchQuery('')} className="clear-button">
+        Effacer
+      </button>
 
-	  {/* Affichage des albums filtrés par la recherche */}
       <div className={`album-list ${menuOpen ? 'shift' : ''}`}>
         {filteredAlbums.length > 0 ? (
-          filteredAlbums.map(album => (
+          filteredAlbums.map((album) => (
             <div key={album.id} className="album-card">
-              <img src={album.cover_image || 'default_cover.jpg'} alt={album.title} />
+              <img
+                src={album.cover_image || 'default_cover.jpg'}
+                alt={album.title}
+              />
               <h3>{album.title}</h3>
-              <p>By: {album.artist ? album.artist.name : 'Unknown Artist'}</p>
+              <p>
+                By: {album.artist ? album.artist.name : 'Unknown Artist'}
+              </p>
               <div className="album-songs-count">
-                <span>Nombre de chansons : {album.songs ? album.songs.length : 0}</span>
+                <span>
+                  Nombre de chansons : {album.songs ? album.songs.length : 0}
+                </span>
               </div>
               <div className="album-purchases">
                 <span>Achats : {album.purchases ? album.purchases : 0}</span>
@@ -218,42 +229,57 @@ function App() {
         )}
       </div>
 
-	 {/* Footer */}
       <footer className="footer">
         <div className="footer-section">
           <h4>Nous contacter</h4>
           <ul>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#support">Support</a></li>
-            <li><a href="#email">Email</a></li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+            <li>
+              <a href="#support">Support</a>
+            </li>
+            <li>
+              <a href="#email">Email</a>
+            </li>
           </ul>
         </div>
         <div className="footer-section">
           <h4>Guide</h4>
           <ul>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#help">Aide</a></li>
+            <li>
+              <a href="#faq">FAQ</a>
+            </li>
+            <li>
+              <a href="#help">Aide</a>
+            </li>
           </ul>
         </div>
-
         <div className="footer-section">
           <h4>Confidentialités</h4>
           <ul>
-            <li><a href="#privacy">Politique de confidentialité</a></li>
-            <li><a href="#terms">Conditions d'utilisation</a></li>
+            <li>
+              <a href="#privacy">Politique de confidentialité</a>
+            </li>
+            <li>
+              <a href="#terms">Conditions d'utilisation</a>
+            </li>
           </ul>
         </div>
-
         <div className="footer-section">
           <h4>Informations légales</h4>
           <ul>
-            <li><a href="#legal">Mentions légales</a></li>
+            <li>
+              <a href="#legal">Mentions légales</a>
+            </li>
           </ul>
         </div>
       </footer>
 
       <div className="right-copy">
-        <p className="copyright">&copy; 2024 AS-BUSINESS. Tous droits réservés.</p>
+        <p className="copyright">
+          &copy; 2024 AS-BUSINESS. Tous droits réservés.
+        </p>
       </div>
     </div>
   );

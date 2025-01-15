@@ -1,246 +1,293 @@
-/* App.css */
-
-body {
-  background-color: #111112; /* Définir l'arrière-plan global */
-  color: white; /* Couleur de texte par défaut pour mieux contraster avec le fond foncé */
+/* Style de la page globale */
+.App {
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f4f4f4;
 }
 
-/* App.css */
-.App {
-  font-family: ui-serif;
+/* Effet de mouvement pour chaque élément */
+.App * {
+  transition: transform 0.2s ease-in-out; /* Transition de mouvement pour tous les éléments */
+}
+
+.App *:hover {
+  transform: translate3d(5px, -5px, 0); /* Déplacement léger vers le haut et la droite */
+}
+
+/* Header */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
   padding: 20px;
+  position: relative;
+}
+
+.header-content h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 1.2em;
+  position: relative; /* Nécessaire pour les effets de mouvement */
+}
+
+.header-nav a:hover {
+  text-decoration: underline;
+  transform: translate3d(5px, -5px, 0); /* Légère translation à l'effet hover */
+}
+
+.header-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  position: relative; /* Position relative pour bien afficher le bouton burger */
-  background-color: #030202;
 }
 
-/* Styles de la barre de recherche */
-.search-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Pousse la barre de recherche vers le coin droit */
-  margin: 20px auto;
-  background-color: white; /* Arrière-plan de la barre de recherche en blanc */
-  width: 100%; /* Prend toute la largeur disponible */
+.header-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; /* Transition de l'avatar */
 }
 
-.clear-button {
-  background: transparent;
-  border: none;
-  font-size: 14px;
-  color: white; /* Couleur par défaut du texte */
-  cursor: pointer;
-  margin-left: 10px; /* Espacement entre le champ de recherche et le bouton */
+.header-intro h2 {
+  font-size: 1.5em;
 }
 
-/* Effet au survol du bouton d'effacement */
-.clear-button:hover {
-  color: red; /* La couleur devient rouge lorsque l'on survole le bouton */
+.header-intro hr {
+  width: 80%;
+  border: 1px solid #bbb;
+  margin-top: 10px;
 }
 
-/* Menu Toggle Button */
+/* Menu burger */
 .menu-toggle {
+  margin-left: auto; /* Pousse le bouton burger à droite */
+  cursor: pointer;
   font-size: 30px;
-  cursor: pointer;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
-}
-
-h1 {
-  color: #250eed;
-}
-
-h2 {
-  margin-top: 20px;
-  font-size: 1.5rem;
-  color: #0bd96b;
-}
-
-.logo-container {
-  display: flex;
-  justify-content: center; /* Centre horizontalement */
-  margin-top: 2vh; /* 2% de la hauteur de l'écran */
-}
-
-.logo {
-  width: 150px; /* Ajustez cette valeur pour contrôler la taille */
-  height: auto;
-}
-
-/* Styles de la barre de recherche */
-.search-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px auto;
-}
-
-.search-input {
-  width: 250px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  padding: 8px 12px;
-  margin-left: 5px;
-  border: none;
-  background-color: black;
   color: white;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
-/* Style pour le menu latéral */
 .sidebar {
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
-  width: 160px;
-  height: 70%;
-  background-color: #0a3252;
-  color: white;
-  padding: 0px;
-  display: flex;
-  transform: translateX(-100%); /* Le menu est caché au départ */
-  transition: transform 0.3s ease; /* Animation pour faire glisser le menu */
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  transition: left 0.3s ease-in-out;
+  padding-top: 60px;
+  z-index: 1000;
 }
+
 .sidebar.open {
-  transform: translateX(0); /* Le menu glisse dans la vue quand l'état est ouvert */
+  left: 0;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-.sidebar li {
+.sidebar ul li {
   padding: 15px;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid #555;
+}
+
+.sidebar ul li:hover {
+  background-color: #444;
+  transform: translate3d(5px, -5px, 0); /* Effet sur le menu burger */
+}
+
+/* Formulaires d'authentification */
+.auth-buttons {
+  text-align: center;
+  margin: 20px;
+}
+
+.auth-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1.2em;
   cursor: pointer;
+  border: none;
+  border-radius: 5px;
 }
 
-.sidebar li:hover {
-  background-color: #555;
+.auth-button-login {
+  background-color: #4CAF50;
+  color: white;
 }
 
+.auth-button-signup {
+  background-color: #2196F3;
+  color: white;
+}
+
+.auth-button:hover {
+  opacity: 0.8;
+  transform: translate3d(5px, -5px, 0); /* Effet sur les boutons de connexion/inscription */
+}
+
+form input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form button:hover {
+  opacity: 0.8;
+  transform: translate3d(5px, -5px, 0); /* Effet sur le bouton de soumission */
+}
+
+/* Messages d'erreur */
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+/* Recherche */
+.search-input {
+  width: 80%;
+  padding: 10px;
+  font-size: 1.1em;
+  margin: 20px auto;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.clear-button {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.clear-button:hover {
+  opacity: 0.8;
+  transform: translate3d(5px, -5px, 0); /* Effet sur le bouton clear */
+}
+
+/* Liste des albums */
 .album-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: 20px;
-  justify-content: center;
-  background-color: #040929;
-  transition: margin-left 0.3s ease; /* Ajout d'une transition pour le contenu */
-  margin-left: 0; /* Position normale quand le menu est fermé */
-}
-
-.album-list.shift { /* Quand le menu est ouvert, déplacer les albums */
-  margin-left: 50px; /* Espace pour le menu latéral */
+  padding: 20px;
 }
 
 .album-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  width: 250px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   text-align: center;
+  padding: 15px;
+  position: relative;
   transition: transform 0.2s ease-in-out;
 }
 
 .album-card:hover {
-  transform: translateY(-10px);
+  transform: translate3d(5px, -5px, 0); /* Effet sur la carte d'album */
 }
 
 .album-card img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
-h3 {
-  font-size: 1.2rem;
+.album-card h3 {
+  font-size: 1.2em;
   margin: 10px 0;
 }
 
-p {
-  margin: 5px 0;
+.album-card p {
+  font-size: 1em;
+  color: #777;
 }
 
-.buttons {
+.album-songs-count, .album-purchases {
+  font-size: 0.9em;
+  color: #555;
   margin-top: 10px;
 }
 
-button {
-  padding: 8px 16px;
-  margin: 5px;
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.listen-button, .buy-button {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.listen-button {
-  background-color: Black; /* Bleu */
-  color: white;
-}
-
-.listen-button:hover {
-  background-color: #0056b3;
-}
-
-.buy-button {
-  background-color: #084370; /* Vert */
-  color: white;
-}
-
-.buy-button:hover {
-  background-color: #218838;
-}
-
-.song-list {
-  margin-top: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.song-column {
-  width: 30px;
-  height: 30px;
-  background-color: #f0f0f0;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-  color: #333;
+.listen-button:hover, .buy-button:hover {
+  opacity: 0.8;
+  transform: translate3d(5px, -5px, 0); /* Effet sur les boutons écouter et acheter */
 }
 
 /* Footer */
 .footer {
   display: flex;
-  justify-content: space-around;
-  background-color: #030302; /* Arrière-plan blanc pour le footer */
+  justify-content: space-between;
+  background-color: #333;
+  color: white;
   padding: 20px;
-  text-align: center;
-  color: #040929;
 }
 
 .footer-section {
-  flex: 1;
-  margin: 10px;
+  width: 23%;
 }
 
 .footer-section h4 {
-  font-size: 1.2rem;
-  color: #ffffff;
-  margin-bottom: 10px;
+  font-size: 1.3em;
 }
 
 .footer-section ul {
@@ -248,67 +295,29 @@ button {
   padding: 0;
 }
 
-.footer-section li {
-  margin: 5px 0;
+.footer-section ul li {
+  margin: 10px 0;
 }
 
-.footer-section a {
-  color: #250eed;
+.footer-section ul li a {
+  color: white;
   text-decoration: none;
 }
 
-.footer-section a:hover {
+.footer-section ul li a:hover {
   text-decoration: underline;
+  transform: translate3d(5px, -5px, 0); /* Effet au survol des liens */
 }
 
-/* Copyright section */
+/* Copyright */
 .right-copy {
-  background-color: #fff;
   text-align: center;
-  padding: 10px;
-  color: #040929;
-  font-size: 0.9rem;
+  padding: 20px;
+  background-color: #333;
+  color: white;
 }
 
-.right-copy p {
+.copyright {
   margin: 0;
-  color: black;
 }
 
-/* Styles pour les boutons de Connexion et Inscription */
-.auth-button {
-  padding: 10px 10px;
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin: 10px; /* Espacement entre les boutons */
-  justify-content: flex-end; /* Place les boutons à droite */
-}
-
-.auth-button-login {
-  background-color: #1a630a; /* Couleur de fond pour le bouton Connexion */
-  color: white;
-}
-
-.auth-button-login:hover {
-  background-color: #555; /* Changer la couleur de fond au survol */
-  transform: scale(1.05); /* Effet de zoom au survol */
-}
-
-.auth-button-signup {
-  background-color: #084370; /* Couleur de fond pour le bouton Inscription */
-  color: white;
-}
-
-.auth-button-signup:hover {
-  background-color: #0bd96b; /* Changer la couleur de fond au survol */
-  transform: scale(1.05); /* Effet de zoom au survol */
-}
-
-.auth-button:focus {
-  outline: none; /* Retirer la bordure au focus */
-  box-shadow: 0 0 5px rgba(37, 14, 237, 0.8); /* Ombre portée pour un focus visible */
-}
