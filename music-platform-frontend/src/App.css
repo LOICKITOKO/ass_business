@@ -416,3 +416,32 @@ button:hover {
 .copyright {
   margin: 0;
 }
+
+/* Points de rupture pour la responsivité */
+@media (max-width: 768px) {
+  .album-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-content h1 {
+    font-size: 1.5em;
+  }
+
+  .search-input {
+    width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .album-list {
+    grid-template-columns: 1fr;
+  }
+
+  .header-content h1 {
+    font-size: 1.2em;
+  }
+
+  .search-input {
+    width: 80%;
+  }
+}

@@ -18,6 +18,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [activeAlbum, setActiveAlbum] = useState(null); // Album actif pour la lecture
+  const [newImage, setNewImage] = useState(null); // Nouvelle image importée
 
   useEffect(() => {
     // Récupère les albums au montage du composant
@@ -72,6 +73,34 @@ function App() {
 
   const handleBack = () => {
     setActiveAlbum(null); // Retourne à la liste des albums
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setNewImage(event.target.result); // Sauvegarde l'image en Base64
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const addImageToAlbum = () => {
+    if (newImage) {
+      const updatedAlbums = [...albums];
+      const newAlbum = {
+        id: Date.now(),
+        title: 'Nouvel Album',
+        cover_image: newImage,
+        artist: { name: 'Artiste Inconnu' },
+        songs: [],
+      };
+      updatedAlbums.push(newAlbum);
+      setAlbums(updatedAlbums);
+      setNewImage(null);
+      alert('Nouvel album ajouté avec succès !');
+    }
   };
 
   const filteredAlbums = albums.filter(
@@ -220,6 +249,12 @@ function App() {
           <li>Albums</li>
           <li>Paramètres</li>
         </ul>
+      </div>
+
+      <div className="upload-section">
+        <h2>Importer une image et créer un album</h2>
+        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <button onClick={addImageToAlbum}>Ajouter l'album</button>
       </div>
 
       <div className={`album-list ${menuOpen ? 'shift' : ''}`}>
