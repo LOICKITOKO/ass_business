@@ -17,6 +17,8 @@ function App() {
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const [activeAlbum, setActiveAlbum] = useState(null); // Album actif pour la lecture
+
   useEffect(() => {
     // Récupère les albums au montage du composant
     fetchAlbums()
@@ -64,6 +66,14 @@ function App() {
     }
   };
 
+  const handleListen = (album) => {
+    setActiveAlbum(album); // Passe à la vue d'écoute avec cet album
+  };
+
+  const handleBack = () => {
+    setActiveAlbum(null); // Retourne à la liste des albums
+  };
+
   const filteredAlbums = albums.filter(
     (album) =>
       album.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -78,9 +88,34 @@ function App() {
     return <p>{error}</p>;
   }
 
+  if (activeAlbum) {
+    return (
+      <div className="album-player">
+        <button onClick={handleBack} className="back-button">
+          ⬅ Retour
+        </button>
+        <div className="player-content">
+          <img
+            src={activeAlbum.cover_image || 'default_cover.jpg'}
+            alt={activeAlbum.title}
+            className="album-cover"
+          />
+          <h1>{activeAlbum.title}</h1>
+          <p>Artiste : {activeAlbum.artist ? activeAlbum.artist.name : 'Inconnu'}</p>
+          <audio controls autoPlay>
+            <source
+              src={activeAlbum.preview || 'default_audio.mp3'}
+              type="audio/mp3"
+            />
+            Votre navigateur ne supporte pas la lecture audio.
+          </audio>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
-      {/* Section de l'en-tête principale */}
       <header className="main-header">
         <div className="header-content">
           <h1>AS-BUSINESS</h1>
@@ -97,14 +132,11 @@ function App() {
         </div>
       </header>
 
-      {/* Section de l'alignement des boutons et barre de recherche */}
       <div className="header-actions">
-        {/* Menu burger */}
         <div className="menu-toggle" onClick={toggleMenu}>
           &#9776;
         </div>
 
-        {/* Connexion / Inscription */}
         <div className="auth-buttons">
           {!isLogin && !isSignUp ? (
             <div>
@@ -162,7 +194,6 @@ function App() {
           )}
         </div>
 
-        {/* Barre de recherche */}
         <input
           type="text"
           value={searchQuery}
@@ -212,7 +243,12 @@ function App() {
                 <span>Achats : {album.purchases ? album.purchases : 0}</span>
               </div>
               <div className="buttons">
-                <button className="listen-button">Écouter</button>
+                <button
+                  className="listen-button"
+                  onClick={() => handleListen(album)}
+                >
+                  Écouter
+                </button>
                 <button className="buy-button">Acheter</button>
               </div>
             </div>
