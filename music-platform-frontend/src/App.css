@@ -158,9 +158,9 @@ form input {
 }
 
 form button {
-  background-color: #2196F3;
+  background-color: brown;
   color: white;
-  padding: 10px 20px;
+  padding: 6px;
   font-size: 1.2em;
   border: none;
   border-radius: 5px;
@@ -225,7 +225,8 @@ form button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   text-align: center;
-  padding: 15px;
+  padding: 40px;
+  margin: 10%;
   position: relative;
   transition: transform 0.2s ease-in-out;
 }
@@ -236,17 +237,18 @@ form button:hover {
 
 .album-card img {
   width: 100%;
-  height: auto;
+  height: 50px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
 .album-card h3 {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin: 10px 0;
 }
 
 .album-card p {
-  font-size: 1em;
+  font-size: 0.9em;
   color: black;
 }
 
