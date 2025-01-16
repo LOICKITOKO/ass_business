@@ -97,70 +97,85 @@ function App() {
         </div>
       </header>
 
-      {/* Connexion / Inscription */}
-      <div className="auth-buttons">
-        {!isLogin && !isSignUp ? (
-          <div>
-            <button
-              className="auth-button auth-button-login"
-              onClick={() => setIsLogin(true)}
-            >
-              Connexion
-            </button>
-            <button
-              className="auth-button auth-button-signup"
-              onClick={() => setIsSignUp(true)}
-            >
-              Inscription
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={isLogin ? handleLogin : handleSignUp}>
-            {isSignUp && (
+      {/* Section de l'alignement des boutons et barre de recherche */}
+      <div className="header-actions">
+        {/* Menu burger */}
+        <div className="menu-toggle" onClick={toggleMenu}>
+          &#9776;
+        </div>
+
+        {/* Connexion / Inscription */}
+        <div className="auth-buttons">
+          {!isLogin && !isSignUp ? (
+            <div>
+              <button
+                className="auth-button auth-button-login"
+                onClick={() => setIsLogin(true)}
+              >
+                Connexion
+              </button>
+              <button
+                className="auth-button auth-button-signup"
+                onClick={() => setIsSignUp(true)}
+              >
+                Inscription
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={isLogin ? handleLogin : handleSignUp}>
+              {isSignUp && (
+                <input
+                  type="text"
+                  placeholder="Nom"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              )}
               <input
-                type="text"
-                placeholder="Nom"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
-            )}
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            {isSignUp && (
               <input
                 type="password"
-                placeholder="Confirmer le mot de passe"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Mot de passe"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
-            )}
-            <button type="submit">
-              {isLogin ? 'Se connecter' : "S'inscrire"}
-            </button>
-          </form>
-        )}
+              {isSignUp && (
+                <input
+                  type="password"
+                  placeholder="Confirmer le mot de passe"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              )}
+              <button type="submit">
+                {isLogin ? 'Se connecter' : "S'inscrire"}
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Barre de recherche */}
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Rechercher un album..."
+          className="search-input"
+        />
+        <button onClick={() => setSearchQuery('')} className="clear-button">
+          Effacer
+        </button>
       </div>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-      {/* Menu burger */}
-      <div className="menu-toggle" onClick={toggleMenu}>
-        &#9776;
-      </div>
 
       <div className={`sidebar ${menuOpen ? 'open' : ''}`}>
         <ul>
@@ -175,17 +190,6 @@ function App() {
           <li>Paramètres</li>
         </ul>
       </div>
-
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={handleSearchChange}
-        placeholder="Rechercher un album..."
-        className="search-input"
-      />
-      <button onClick={() => setSearchQuery('')} className="clear-button">
-        Effacer
-      </button>
 
       <div className={`album-list ${menuOpen ? 'shift' : ''}`}>
         {filteredAlbums.length > 0 ? (
@@ -210,13 +214,6 @@ function App() {
               <div className="buttons">
                 <button className="listen-button">Écouter</button>
                 <button className="buy-button">Acheter</button>
-              </div>
-              <div className="song-list">
-                {Array.from({ length: album.songs_count }).map((_, index) => (
-                  <div key={index} className="song-column">
-                    <p>Chanson {index + 1}</p>
-                  </div>
-                ))}
               </div>
             </div>
           ))
