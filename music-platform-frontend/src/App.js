@@ -7,7 +7,6 @@ function App() {
   const [loading, setLoading] = useState(true); // État de chargement
   const [error, setError] = useState(null); // État d'erreur
   const [menuOpen, setMenuOpen] = useState(false); // Menu burger
-
   const [searchQuery, setSearchQuery] = useState(''); // Requête de recherche
   const [isLogin, setIsLogin] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -16,12 +15,17 @@ function App() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
   const [activeAlbum, setActiveAlbum] = useState(null); // Album actif pour la lecture
   const [newImage, setNewImage] = useState(null); // Nouvelle image importée
 
+  // Nouveaux états pour la gestion du formulaire "Add Album"
+  const [isAddAlbum, setIsAddAlbum] = useState(false); // Affichage du formulaire "Add Album"
+  const [artistName, setArtistName] = useState(''); // Nom de l'artiste
+  const [songName, setSongName] = useState(''); // Nom de la chanson
+  const [songPrice, setSongPrice] = useState(''); // Prix de la chanson
+  const [coverImage, setCoverImage] = useState(null); // Image de couverture
+
   useEffect(() => {
-    // Récupère les albums au montage du composant
     fetchAlbums()
       .then((data) => {
         setAlbums(data); // Stocke les albums dans l'état
@@ -75,32 +79,27 @@ function App() {
     setActiveAlbum(null); // Retourne à la liste des albums
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setNewImage(event.target.result); // Sauvegarde l'image en Base64
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleAddAlbumToggle = () => {
+    setIsAddAlbum(!isAddAlbum); // Bascule entre afficher ou masquer le formulaire d'ajout
   };
 
-  const addImageToAlbum = () => {
-    if (newImage) {
-      const updatedAlbums = [...albums];
-      const newAlbum = {
-        id: Date.now(),
-        title: 'Nouvel Album',
-        cover_image: newImage,
-        artist: { name: 'Artiste Inconnu' },
-        songs: [],
-      };
-      updatedAlbums.push(newAlbum);
-      setAlbums(updatedAlbums);
-      setNewImage(null);
-      alert('Nouvel album ajouté avec succès !');
-    }
+  const handleAddAlbum = (e) => {
+    e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+    const newAlbum = {
+      id: Date.now(),
+      title: songName,
+      cover_image: coverImage,
+      artist: { name: artistName },
+      songs: [{ title: songName, price: songPrice }],
+    };
+
+    setAlbums([...albums, newAlbum]); // Ajoute l'album à la liste
+    setArtistName('');
+    setSongName('');
+    setSongPrice('');
+    setCoverImage(null);
+    setIsAddAlbum(false); // Cache le formulaire après ajout
+    alert('Album ajouté avec succès !'); // Affiche un message de confirmation
   };
 
   const filteredAlbums = albums.filter(
@@ -251,13 +250,47 @@ function App() {
         </ul>
       </div>
 
-      <div className="upload-section">
-        <h2>Importer une image et créer un album</h2>
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
-        <button onClick={addImageToAlbum}>Ajouter l'album</button>
-      </div>
+      <button onClick={handleAddAlbumToggle} className="auth-button">
+        Add Album
+      </button>
 
-      <div className={`album-list ${menuOpen ? 'shift' : ''}`}>
+      {isAddAlbum && (
+        <div className="add-album-form">
+          <h2>Ajouter un Album</h2>
+          <form onSubmit={handleAddAlbum}>
+            <input
+              type="text"
+              placeholder="Nom de l'artiste"
+              value={artistName}
+              onChange={(e) => setArtistName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Nom de la chanson"
+              value={songName}
+              onChange={(e) => setSongName(e.target.value)}
+              required
+            />
+            <input
+              type="number"
+              placeholder="Prix de la chanson"
+              value={songPrice}
+              onChange={(e) => setSongPrice(e.target.value)}
+              required
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setCoverImage(URL.createObjectURL(e.target.files[0]))}
+              required
+            />
+            <button type="submit">Ajouter</button>
+          </form>
+        </div>
+      )}
+
+      <div className="album-list">
         {filteredAlbums.length > 0 ? (
           filteredAlbums.map((album) => (
             <div key={album.id} className="album-card">
@@ -339,12 +372,6 @@ function App() {
           </ul>
         </div>
       </footer>
-
-      <div className="right-copy">
-        <p className="copyright">
-          &copy; 2024 AS-BUSINESS. Tous droits réservés.
-        </p>
-      </div>
     </div>
   );
 }
