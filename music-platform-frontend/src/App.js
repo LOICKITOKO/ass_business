@@ -24,6 +24,7 @@ function App() {
   const [songName, setSongName] = useState(''); // Nom de la chanson
   const [songPrice, setSongPrice] = useState(''); // Prix de la chanson
   const [coverImage, setCoverImage] = useState(null); // Image de couverture
+  const [selectedSongs, setSelectedSongs] = useState([]);
 
   useEffect(() => {
     fetchAlbums()
@@ -90,14 +91,19 @@ function App() {
       title: songName,
       cover_image: coverImage,
       artist: { name: artistName },
-      songs: [{ title: songName, price: songPrice }],
-    };
+      songs: selectedSongs.map((file) => ({
+      title: file.name,
+      price: songPrice || '0',
+      fileUrl: URL.createObjectURL(file),
+    })), // Ajout des chansons sélectionnées
+  };
 
     setAlbums([...albums, newAlbum]); // Ajoute l'album à la liste
     setArtistName('');
     setSongName('');
     setSongPrice('');
     setCoverImage(null);
+    setSelectedSongs([]); // Réinitialise la liste des chansons
     setIsAddAlbum(false); // Cache le formulaire après ajout
     alert('Album ajouté avec succès !'); // Affiche un message de confirmation
   };
@@ -107,6 +113,11 @@ function App() {
       album.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       album.artist?.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleFileSelection = (e) => {
+	  const files = Array.from(e.target.files); // Récupère les fichiers sélectionnés
+	  setSelectedSongs([...selectedSongs, ...files]); // Ajoute les fichiers à la liste existante
+  };
 
   if (loading) {
     return <p>Chargement des albums...</p>;
@@ -285,6 +296,21 @@ function App() {
               onChange={(e) => setCoverImage(URL.createObjectURL(e.target.files[0]))}
               required
             />
+	    <div>
+	      <label htmlFor="songFiles">Ajouter des chansons :</label>
+	      <input
+                type="file"
+                id="songFiles"
+                accept="audio/*"
+                multiple
+                onChange={handleFileSelection}
+	      />
+	      <ul>
+	      {selectedSongs.map((file, index) => (
+		      <li key={index}>{file.name}</li>
+	      ))}
+	      </ul>
+	      </div>
             <button type="submit">Ajouter</button>
           </form>
         </div>

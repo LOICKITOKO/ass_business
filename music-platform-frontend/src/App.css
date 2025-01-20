@@ -90,7 +90,7 @@
   left: -250px;
   width: 250px;
   height: 100%;
-  background-color: cadetblue;
+  background-color: black;
   transition: left 0.3s ease-in-out;
   padding-top: 60px;
   z-index: 1000;
@@ -354,7 +354,7 @@ form button:hover {
 /* Pour un effet général harmonieux sur toute la page */
 body {
   background-color: black;
-  color: white;
+  color: black;
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
@@ -473,7 +473,7 @@ button:hover {
 .add-album-form form button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: brown;
   color: white;
   border: none;
   font-size: 1rem;
@@ -527,7 +527,7 @@ button:hover {
 
 .buttons button {
   padding: 10px 15px;
-  background-color: #4CAF50;
+  background-color: black;
   color: white;
   border: none;
   cursor: pointer;
